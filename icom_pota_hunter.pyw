@@ -92,7 +92,7 @@ def get_spots():
     spotdata = sorted(json.loads(response.read()), key=lambda k: k['frequency'], reverse=False)
     
     for spot in spotdata:
-        if spot['mode'] == 'SSB' and not re.search('qrt|qsyd', spot['comments'], re.IGNORECASE):
+        if spot['mode'] == 'SSB' and not re.search('qrt|qsy', spot['comments'], re.IGNORECASE):
         #if spot['mode']:
                 
             spottime = datetime.strptime(spot['spotTime'], '%Y-%m-%dT%H:%M:%S')
