@@ -108,7 +108,7 @@ def get_spots():
                         
             parklocations = spot['locationDesc'].split(',')
             if len(parklocations) > 2:
-                parklocation = parklocations[0] + ',' + parklocations[1] + ',+' + str(len(parklocations)-3)
+                parklocation = parklocations[0] + ',' + parklocations[1] + ',+' + str(len(parklocations)-2)
             else:
                 parklocation = parklocations[0]
  
