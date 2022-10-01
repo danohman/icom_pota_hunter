@@ -92,7 +92,7 @@ def get_spots():
     spotdata = sorted(json.loads(response.read()), key=lambda k: k['frequency'], reverse=False)
     
     for spot in spotdata:
-        if spot['mode'] == 'SSB' and not re.search('qrt|qsy', spot['comments'], re.IGNORECASE):
+        if spot['mode'] == 'SSB' and not re.search('qrt|qsyd', spot['comments'], re.IGNORECASE):
         #if spot['mode']:
                 
             spottime = datetime.strptime(spot['spotTime'], '%Y-%m-%dT%H:%M:%S')
@@ -104,7 +104,13 @@ def get_spots():
             if spotage_mins >= 1:
                 spotage = str(spotage_mins) + ' min ago'
             else:
-                spotage = str(spotage_secs) + ' sec ago' 
+                spotage = str(spotage_secs) + ' sec ago'
+                        
+            parklocations = spot['locationDesc'].split(',')
+            if len(parklocations) > 2:
+                parklocation = parklocations[0] + ',' + parklocations[1] + ',+' + str(len(parklocations)-3)
+            else:
+                parklocation = parklocations[0]
  
             spots.append(
                 [
@@ -112,7 +118,7 @@ def get_spots():
                     spot['activator'],
                     spot['reference'],
                     spot['name'],
-                    spot['locationDesc'],
+                    parklocation,
                     spot['count'],
                     spotage,
                     spot['spotter'],
