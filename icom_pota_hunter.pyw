@@ -116,8 +116,7 @@ def get_spots():
                     spot['count'],
                     spotage,
                     spot['spotter'],
-                    spot['comments'],
-                    spot['spotId']
+                    spot['comments']
                 ]
             )
 
@@ -152,18 +151,22 @@ def update_info_window(arr):
     window['-SPOTCOUNT-'].update(arr[5])
     window['-SPOTLAST-'].update(lastspotcomment)
 
-    current_spot_frequency = spots[current_spot_num][0]
-    current_spot_activator = spots[current_spot_num][1]
-    current_spot_parknumber = 'POTA ' + spots[current_spot_num][2]
-    current_spot_parkinfo = '(' + spots[current_spot_num][4] + ') ' + spots[current_spot_num][3]
-    current_spot_spotid = spots[current_spot_num][9]
+#    current_spot_frequency = spots[current_spot_num][0]
+#    current_spot_activator = spots[current_spot_num][1]
+#    current_spot_parknumber = 'POTA ' + spots[current_spot_num][2]
+#    current_spot_parkinfo = '(' + spots[current_spot_num][4] + ') ' + spots[current_spot_num][3]
+#    current_spot_spotid = spots[current_spot_num][9]
+    current_spot_frequency = arr[0]
+    current_spot_activator = arr[1]
+    current_spot_parknumber = 'POTA ' + arr[2]
+    current_spot_parkinfo = '(' + arr[4] + ') ' + arr[3]
     
     window['click_copy_freq'].update(visible=True)
     window['click_copy_activator'].update(visible=True)
     window['click_copy_parknumber'].update(visible=True)
     window['click_copy_parkinfo'].update(visible=True)
     
-    if current_spot_spotid in hunted:
+    if current_spot_frequency + ':' + current_spot_activator in hunted:
         window['click_mark_hunted'].update(visible=False)
         window['spotid_hunted'].update(visible=True)
     else:
@@ -307,7 +310,7 @@ while True:
         break
 
     if event == 'click_mark_hunted':
-        hunted.append(current_spot_spotid)
+        hunted.append(current_spot_frequency + ':' + current_spot_activator)
         window['click_mark_hunted'].update(visible=False)
         window['spotid_hunted'].update(visible=True)
         
