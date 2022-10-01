@@ -8,4 +8,9 @@ Requirements:
   pyperclip
   PySimpleGUI
 
-Please fork this and make it better!
+The Icom radio's CIV COM Port, Baud rate, and Address are hard coded into the script along with the path to the Image file.
+
+Change these!
+
+Please fork this and make it better! I am a horrendous python coder so excuse my messy crap.
+
