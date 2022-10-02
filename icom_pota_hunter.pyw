@@ -120,8 +120,8 @@ def get_spots():
                 spotage = str(spotage_secs) + ' sec ago'
                         
             parklocations = spot['locationDesc'].split(',')
-            if len(parklocations) > 2:
-                parklocation = parklocations[0] + ',' + parklocations[1] + ',+' + str(len(parklocations)-2)
+            if len(parklocations) > 1:
+                parklocation = parklocations[0] + ',+' + str(len(parklocations)-1)
             else:
                 parklocation = parklocations[0]
  
@@ -166,7 +166,7 @@ def update_info_window(arr):
     window['-SPOTFREQ-'].update(arr[0])
     window['-SPOTACTIVATOR-'].update(arr[1])
     window['-SPOTPARKNUMBER-'].update(arr[2])
-    window['-SPOTPARKINFO-'].update('(' + arr[4] + ') ' + arr[3])
+    window['-SPOTPARKINFO-'].update('[' + arr[4] + '] ' + arr[3])
     window['-SPOTCOUNT-'].update(arr[5])
     window['-SPOTLAST-'].update(lastspotcomment)
 
