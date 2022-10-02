@@ -269,7 +269,7 @@ col1 = sg.Col(
             sg.Text('Last Spot', font=("Helvetica", 12, 'bold'), size=(10,1)),
             sg.Text('None', key='-SPOTLAST-', font=("Helvetica", 12))
         ]
-    ], size=(900,190), pad=(0,0),    
+    ], size=(700,190), pad=(0,0),    
 )
 
 col2 = sg.Col(
@@ -281,9 +281,14 @@ col2 = sg.Col(
             sg.Button(' Sync Clock ', key='click_sync_clock', button_color=('white','darkgreen'), tooltip='Sync radio time'),
             sg.Button(' About ', key='click_about', button_color=('white','darkgreen')),
             sg.Button(' Exit ', key='click_exit', button_color=('white','darkred')),
-            sg.Text('Click "Get Spots" to start', key='-INFO-', justification="center", text_color='blue', font=("Helvetica", 11, 'bold'), pad=(40,0), size=(40,1), relief=sg.RELIEF_SUNKEN)
+            sg.Text('LATE SHIFT', visible=False, key='lateshift', justification="left", text_color='cyan', font=("Helvetica", 16, 'bold'), pad=(250,0), size=(20,1))
+        ],
+        [],
+        [],
+        [
+            sg.Text('Click "Get Spots" to start', key='-INFO-', justification="left", text_color='blue', font=("Helvetica", 11, 'bold'), pad=(5,0), size=(53,1), relief=sg.RELIEF_SUNKEN)
         ]
-    ], size=(900,40), pad=(0,0),
+    ], size=(700,60), pad=(0,0),
 )
 
 col3 = sg.Col(
@@ -292,7 +297,7 @@ col3 = sg.Col(
             sg.Image(potalogo),
             sg.Text('WD4DAN ICOM POTA Hunter', justification="center", font=("Helvetica", 18))
         ]
-    ], size=(900,200), pad=(0,0),
+    ], size=(700,150), pad=(0,0),
 )
 
 col4 = sg.Col(
@@ -307,22 +312,19 @@ col4 = sg.Col(
     ], size=(400,160), pad=(0,0),
 )
 
-col5 = sg.Col(
-    [
-        [
-            sg.Text('LATE SHIFT', visible=False, key='lateshift', justification="left", text_color='cyan', font=("Helvetica", 16, 'bold'), pad=(0,0), size=(20,1))
-        ],
-    ], size=(400,160), pad=(0,0),
-)
-
 layout = [
-    [sg.Frame('', [[col3]], border_width=0)],
     [
-        sg.Frame(' Quick Notes ', [[col4]]),
-        sg.Frame('', [[col5]], border_width=0)
+        sg.Frame('', [[col3]], border_width=0)
     ],
-    [sg.Frame(' Spot Information ', [[col1]])],
-    [sg.Frame(' Commands and Information ', [[col2]])]
+    [
+        sg.Frame(' Quick Notes ', [[col4]])
+    ],
+    [
+        sg.Frame(' Spot Information ', [[col1]])
+    ],
+    [
+        sg.Frame(' Commands and Information ', [[col2]])
+    ]
 ]
 
 window = sg.Window('WD4DAN ICOM POTA Hunter', layout, finalize=True)
