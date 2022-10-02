@@ -33,7 +33,7 @@ radiotimezone = 'UTC' # Timezone - eg; 'UTC' or 'America/New_York', etc
 ###########################################################################
 
 # global vars
-lateshifthours = ['00','01','02','03','04','05','06','07','08','09','10','11']
+lateshifthours = ['23','00','01','02','03','04','05','06','07','08','09','10','11']
 spots = []
 hunted = []
 current_spot_num = 0
@@ -246,6 +246,8 @@ def update_late_shift_text():
     hour = datetime.now(pytz.timezone('UTC')).strftime("%H")    
     if hour in lateshifthours:
         window['lateshift'].update(visible=True)
+    else:
+        window['lateshift'].update(visible=False)
 
 ##########################################################
 
@@ -295,7 +297,7 @@ col2 = sg.Col(
             sg.Button(' Sync Clock ', key='click_sync_clock', button_color=('white','darkgreen'), tooltip='Sync radio time'),
             sg.Button(' About ', key='click_about', button_color=('white','darkgreen')),
             sg.Button(' Exit ', key='click_exit', button_color=('white','darkred')),
-            sg.Text('LATE SHIFT', visible=False, key='lateshift', justification="left", text_color='cyan', font=("Helvetica", 16, 'bold'), pad=(250,0), size=(20,1))
+            sg.Text('LATE SHIFT', visible=False, key='lateshift', justification="left", text_color='cyan', font=("Helvetica", 16, 'bold'), pad=(50,0), size=(20,1))
         ],
         [],
         [],
