@@ -16,11 +16,11 @@ civaddr = '0x94' # Icom IC-7300 default
 comport = 'COM5'
 baudrate = 19200
 radiotimezone = 'UTC' # Timezone - eg; 'UTC' or 'America/New_York', etc
-potalogo = r'C:\Users\Dan\Dropbox\Radio Things\POTA\pota-logo.png'
+potalogo = r'C:\Users\Dan\Dropbox\Radio Things\POTA\icom_pota_hunter\pota-logo.png'
 ###########################################################################
 
 # global vars
-lateshifthours = ['00','01','02','03','04','05','06','07','08','09','10','11','12']
+lateshifthours = ['00','01','02','03','04','05','06','07','08','09','10','11']
 spots = []
 hunted = []
 current_spot_num = 0
