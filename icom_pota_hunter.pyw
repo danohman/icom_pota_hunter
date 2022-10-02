@@ -288,21 +288,31 @@ col3 = sg.Col(
         [
             sg.Image(potalogo),
             sg.Text('WD4DAN ICOM POTA Hunter', justification="center", font=("Helvetica", 16)),
-            sg.Text('LATE SHIFT', visible=False, key='lateshift', justification="center", text_color='CYAN', font=("Helvetica", 16, 'bold'), pad=(80,0), size=(20,1))
+            sg.Text('LATE SHIFT', visible=False, key='lateshift', justification="center", text_color='CYAN', font=("Helvetica", 16, 'bold'), pad=(80,0), size=(20,1)),
         ]
     ], size=(900,200), pad=(0,0),
 )
 
+col4 = sg.Col(
+    [
+        [
+            sg.Multiline(size=(50,6), key='-notes-'),
+        ],
+        [
+            sg.Button(' Copy ', key='click_copy_notes'),
+            sg.Button(' Clear ', key='click_clear_notes')          
+        ]
+    ], size=(900,145), pad=(0,0),
+)
 
 layout = [
     [sg.Frame('', [[col3]], border_width=0)],
+    [sg.Frame(' Quick Notes ', [[col4]])],
     [sg.Frame(' Spot Information ', [[col1]])],
     [sg.Frame(' Commands and Information ', [[col2]])]
 ]
 
 window = sg.Window('ICOM POTA Hunter', layout)
-
-
 
 while True:
     event, values = window.Read()
@@ -331,7 +341,13 @@ while True:
 
     if event == 'click_copy_parkinfo':
         pyperclip.copy(current_spot_parkinfo)
+        
+    if event == 'click_copy_notes':
+        pyperclip.copy(values['-notes-'])
 
+    if event == 'click_clear_notes':
+        window['-notes-'].update('')
+        
     if event == 'click_about':
         sg.popup('Version 1.0','Dan Muntz - WD4DAN', 'dan@wd4dan.net', '', 'Spots shown are "SSB" spots that are not "QRT" or "QSY"', '')
 
