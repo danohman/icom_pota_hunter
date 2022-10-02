@@ -11,11 +11,24 @@ import pyperclip
 from datetime import datetime
 from urllib.request import urlopen
 
+###########################################################################
 civaddr = '0x94' # Icom IC-7300 default
 comport = 'COM5'
 baudrate = 19200
 radiotimezone = 'UTC' # Timezone - eg; 'UTC' or 'America/New_York', etc
 potalogo = r'C:\Users\Dan\Dropbox\Radio Things\POTA\pota-logo.png'
+###########################################################################
+
+# global vars
+lateshifthours = ['00','01','02','03','04','05','06','07','08','09','10','11','12']
+spots = []
+hunted = []
+current_spot_num = 0
+current_spot_frequency = ''
+current_spot_activator = ''
+current_spot_parknumber = ''
+current_spot_parkinfo = ''
+current_spot_spotid = ''
 
 ser = serial.Serial(comport, baudrate)
 ser.setDTR(False)
@@ -157,11 +170,6 @@ def update_info_window(arr):
     window['-SPOTCOUNT-'].update(arr[5])
     window['-SPOTLAST-'].update(lastspotcomment)
 
-#    current_spot_frequency = spots[current_spot_num][0]
-#    current_spot_activator = spots[current_spot_num][1]
-#    current_spot_parknumber = 'POTA ' + spots[current_spot_num][2]
-#    current_spot_parkinfo = '(' + spots[current_spot_num][4] + ') ' + spots[current_spot_num][3]
-#    current_spot_spotid = spots[current_spot_num][9]
     current_spot_frequency = arr[0]
     current_spot_activator = arr[1]
     current_spot_parknumber = 'POTA ' + arr[2]
@@ -219,18 +227,13 @@ def tune_previous_spot():
 
             window['-INFO-'].update('Spot ' + str(display_spot_num) + ' of ' + str(len(spots)) + ' : VFO tuned to ' + spots[current_spot_num][0] + ' ' + modename)
             window.refresh()
+ 
+def update_late_shift_text():
+    hour = datetime.now(pytz.timezone('UTC')).strftime("%H")    
+    if hour in lateshifthours:
+        window['lateshift'].update(visible=True)
 
-######################
-
-# global vars
-spots = []
-hunted = []
-current_spot_num = 0
-current_spot_frequency = ''
-current_spot_activator = ''
-current_spot_parknumber = ''
-current_spot_parkinfo = ''
-current_spot_spotid = ''
+##########################################################
 
 sg.ChangeLookAndFeel('DarkGreen6')
 
@@ -287,8 +290,7 @@ col3 = sg.Col(
     [
         [
             sg.Image(potalogo),
-            sg.Text('WD4DAN ICOM POTA Hunter', justification="center", font=("Helvetica", 16)),
-            sg.Text('LATE SHIFT', visible=False, key='lateshift', justification="center", text_color='CYAN', font=("Helvetica", 16, 'bold'), pad=(80,0), size=(20,1)),
+            sg.Text('WD4DAN ICOM POTA Hunter', justification="center", font=("Helvetica", 18))
         ]
     ], size=(900,200), pad=(0,0),
 )
@@ -296,31 +298,40 @@ col3 = sg.Col(
 col4 = sg.Col(
     [
         [
-            sg.Multiline(size=(50,6), key='-notes-'),
+            sg.Multiline(size=(40,6), key='-notes-', font=("Helvetica", 12, 'bold'))
         ],
         [
             sg.Button(' Copy ', key='click_copy_notes'),
             sg.Button(' Clear ', key='click_clear_notes')          
         ]
-    ], size=(900,145), pad=(0,0),
+    ], size=(400,160), pad=(0,0),
+)
+
+col5 = sg.Col(
+    [
+        [
+            sg.Text('LATE SHIFT', visible=False, key='lateshift', justification="left", text_color='cyan', font=("Helvetica", 16, 'bold'), pad=(0,0), size=(20,1))
+        ],
+    ], size=(400,160), pad=(0,0),
 )
 
 layout = [
     [sg.Frame('', [[col3]], border_width=0)],
-    [sg.Frame(' Quick Notes ', [[col4]])],
+    [
+        sg.Frame(' Quick Notes ', [[col4]]),
+        sg.Frame('', [[col5]], border_width=0)
+    ],
     [sg.Frame(' Spot Information ', [[col1]])],
     [sg.Frame(' Commands and Information ', [[col2]])]
 ]
 
-window = sg.Window('ICOM POTA Hunter', layout)
+window = sg.Window('WD4DAN ICOM POTA Hunter', layout, finalize=True)
+update_late_shift_text()
 
 while True:
     event, values = window.Read()
 
-    hour = datetime.now(pytz.timezone('UTC')).strftime("%H")
-    lateshifthours = ['00','01','02','03','04','05','06','07','08','09','10','11','12']
-    if hour in lateshifthours:
-        window['lateshift'].update(visible=True)
+    update_late_shift_text()
     
     if event == sg.WIN_CLOSED or event == 'click_exit':
         break
