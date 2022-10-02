@@ -1,3 +1,12 @@
+##########################################################################
+# ICOM POTA Hunter by WD4DAN - dan@wd4dan.net
+#
+# You'll need to install the following modules, use pip or whatever:
+#   pytz
+#   PySimpleGUI
+#   pyperclip
+##########################################################################
+
 import os
 import time
 import serial
@@ -12,11 +21,15 @@ from datetime import datetime
 from urllib.request import urlopen
 
 ###########################################################################
+# EDIT BELOW AND CHANGE TO YOUR NEEDS
+###########################################################################
 civaddr = '0x94' # Icom IC-7300 default
 comport = 'COM5'
 baudrate = 19200
 radiotimezone = 'UTC' # Timezone - eg; 'UTC' or 'America/New_York', etc
 potalogo = r'C:\Users\Dan\Dropbox\Radio Things\POTA\icom_pota_hunter\pota-logo.png'
+###########################################################################
+# STOP EDITING
 ###########################################################################
 
 # global vars
