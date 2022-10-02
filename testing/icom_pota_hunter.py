@@ -33,7 +33,7 @@ radiotimezone = 'UTC' # Timezone - eg; 'UTC' or 'America/New_York', etc
 ###########################################################################
 
 # global vars
-lateshifthours = ['23','00','01','02','03','04','05','06','07','08','09','10','11']
+lateshifthours = ['00','01','02','03','04','05','06','07','08','09','10','11']
 spots = []
 hunted = []
 current_spot_num = 0
