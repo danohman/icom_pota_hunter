@@ -311,7 +311,7 @@ col3 = sg.Col(
     [
         [
             sg.Image(potalogo),
-            sg.Text('WD4DAN ICOM POTA Hunter', justification="center", font=("Helvetica", 18))
+            sg.Text('WD4DAN ICOM POTA Hunter', justification="center", font=("Helvetica", 18, 'bold'))
         ]
     ], size=(700,150), pad=(0,0),
 )
