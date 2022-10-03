@@ -4,8 +4,6 @@ Icom POTA (Parks on the Air) Hunter
 
 Python script to fetch spots from Parks on the Air and tune your ICOM radio to the spot frequency
 
-See the Wiki tab for screenshots
-
 Requirements:
   pytz
   pyperclip
