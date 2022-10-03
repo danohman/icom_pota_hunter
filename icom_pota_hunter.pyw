@@ -178,7 +178,7 @@ def update_info_window(arr):
 
     lastspotcomment = arr[6] + ' > ' + arr[7] + ' > ' + arr[8]
     window['-SPOTFREQ-'].update(arr[0])
-    window['-SPOTACTIVATOR-'].update(arr[1])
+    window['-SPOTACTIVATOR-'].update(arr[1].replace('0', 'Ø'))
     window['-SPOTPARKNUMBER-'].update(arr[2])
     window['-SPOTPARKINFO-'].update('[' + arr[4] + '] ' + arr[3])
     window['-SPOTCOUNT-'].update(arr[5])
