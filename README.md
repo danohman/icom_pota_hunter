@@ -1,5 +1,7 @@
 # icom_pota_hunter
 
+NOTE: I'm really nto developing this any longer since I found and use the POTAPlus Chrome/Edge Extension
+
 Icom POTA (Parks on the Air) Hunter
 
 Python script to fetch spots from Parks on the Air and tune your ICOM radio to the spot frequency
