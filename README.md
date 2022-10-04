@@ -1,6 +1,6 @@
 # icom_pota_hunter
 
-NOTE: I'm really nto developing this any longer since I found and use the POTAPlus Chrome/Edge Extension
+NOTE: I'm really not developing this any longer since I found and use the POTAPlus Chrome/Edge Extension
 
 Icom POTA (Parks on the Air) Hunter
 
